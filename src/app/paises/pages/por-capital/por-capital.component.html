@@ -1,0 +1,34 @@
+<div class="animate__animated animate__fadeIn">
+    <h2>Por capital</h2>
+    <hr>
+
+    <div class="row">
+        <div class="col">
+            <app-paises-input 
+                (onEnter)="buscarPorCapital($event)"
+                placeholder="Buscar por capital...">
+            </app-paises-input> 
+        </div>
+    </div>
+    <hr>
+
+
+    <!--En el caso de que el usuario no encuentre lo que busca-->
+    <div *ngIf="hayError" class="alert alert-danger">
+        No se encontró ninguna coincidencia con el término "{{termino}}"
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <app-paises-tabla [paises]="paises"></app-paises-tabla>
+        </div>
+    </div>
+</div> <!--fadeIn-->
+<!--
+
+Eventos:
+---------------
+1-> (onEnter) llama el método buscarPorPais y le pasa el $event que es el termino del input
+2-> (onDebounce) -> se dispara cuando presiones uan tecla
+
+-->

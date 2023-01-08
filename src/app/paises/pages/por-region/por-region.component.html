@@ -1,0 +1,46 @@
+<div class="animate__animated animate__fadeIn">
+    <h2>Buscar región: <small>{{regionActiva | titlecase}}</small></h2>
+    <hr>
+
+    <h5>Selecciona la región</h5>
+
+    <div class="row">
+        <div class="col">
+            <button *ngFor="let r of regiones" 
+                    (click)="activarRegion(r)"
+                    [class]="(r === regionActiva) ? 'btn btn-primary' : 'btn btn-outline-primary' "
+                    >
+                {{r | titlecase}}
+            </button>
+        </div>
+    </div>
+
+
+    <div class="row mt-4">
+        <div class="col">
+            <app-paises-tabla [paises]="paises"></app-paises-tabla>
+        </div>
+    </div>
+</div> <!--fadeIn-->
+
+<!--
+Vers1:
+· class="btn btn-outline-primary" es la clase por defecto 
+· [class.btn-primary]="r === regionActiva"> sólo se activa cuando r es igual a regiónActiva,
+Es decir, cuando el elemento del array es igual a sí misma
+
+Vers2:
+[ngClass]="{
+            'btn-primary':r === regionActiva,
+            'btn-outline-primary':r !== regionActiva
+            }"
+
+Vers3:
+[class]="(r === regionActiva) ? 'btn btn-primary' : 'btn btn-outline-primary' "
+· Si cuando el elemento del array es igual a sí misma (actual y la activa), si es así, coloca
+ese tipo de botón : caso contrario, el otro botón
+
+Vers4:
+[ngClass]="{'active': region === regionActiva}"
+
+-->

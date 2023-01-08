@@ -1,0 +1,8 @@
+<form (ngSubmit)="buscar()">
+    <input type="text" [(ngModel)]="termino"  
+            class="form-control" name="termino" 
+            [placeholder]="placeholder" 
+            autocomplete="off" 
+            (input)="dBouncer()"
+            />
+</form>

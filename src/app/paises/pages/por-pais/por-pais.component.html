@@ -1,0 +1,54 @@
+<div class="animate__animated animate__fadeIn">
+    <h2>Buscar país</h2>
+    <hr>
+
+    <!--Cuando empiezas a escribir se dispara el onDebounce--->
+    <div class="row">
+        <div class="col">
+            <app-paises-input 
+                (onEnter)="buscarPorPais($event)"
+                (onDebounce)="sugerencias($event)"
+                placeholder="Buscar por país...">
+            </app-paises-input> 
+        </div>
+    </div>
+
+    <!-- SUGERENCIAS de país coincidente-->
+    <ul *ngIf="mostrarOcultarSugerencias===true" class="list-group"> <!--Sólo si el if es true-->
+        <li *ngFor="let ps of paisesSugeridos" class="list-group-item list-group-item-action">
+            <a  class="nav-link" 
+                [routerLink]="['/pais', ps.cca2]">
+                {{ps.name.common}}
+            </a> 
+        </li>
+    <!-- SUGERENCIAS de palabra introducida-->
+        <li (click)="buscarSugerido(termino)" class="list-group-item list-group-item-action">
+            <a class="nav-link">
+                Buscar "{{termino}}"
+            </a> 
+        </li>
+    </ul>
+    <!-- ------- -->
+
+    <hr>
+
+    <!--En el caso de que el usuario no encuentre lo que busca-->
+    <div *ngIf="hayError" class="alert alert-danger">
+        No se encontró ninguna coincidencia con el término "{{termino}}"
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <app-paises-tabla [paises]="paises"></app-paises-tabla>
+        </div>
+    </div>
+</div> <!--fadeIn-->
+
+<!--
+
+Eventos:
+---------------
+1-> (onEnter) llama el método buscarPorPais y le pasa el $event que es el termino del input
+2-> (onDebounce) -> se dispara cuando presiones uan tecla
+
+-->
